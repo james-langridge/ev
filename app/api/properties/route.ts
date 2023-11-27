@@ -1,10 +1,10 @@
 import {NextResponse} from 'next/server'
 
-import {generateProperties} from '@/lib/utils'
+import {getProperties} from '@/lib/properties'
 
 export async function GET() {
   try {
-    const properties = generateProperties()
+    const properties = getProperties()
 
     return NextResponse.json({data: properties}, {status: 200})
   } catch (e) {
