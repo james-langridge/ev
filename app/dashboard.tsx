@@ -6,6 +6,10 @@ import {useProperties} from '@/hooks/useProperties'
 export default function DashBoard() {
   const {properties} = useProperties()
 
+  if (!properties) {
+    return null
+  }
+
   return (
     <div className="flex flex-wrap justify-evenly items-center h-screen space-x-2 space-y-6 p-4">
       {properties &&

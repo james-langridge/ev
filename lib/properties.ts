@@ -1,7 +1,17 @@
 import {generateProperties, Property} from '@/lib/utils'
 
-const properties: Property[] = generateProperties()
+let properties: Property[] = generateProperties()
 
 export function getProperties() {
   return properties
+}
+
+export function setProperties(id: string) {
+  properties = properties.filter(property => property.id !== id)
+
+  return properties
+}
+
+export function addProperty(property: Property) {
+  properties.push(property)
 }

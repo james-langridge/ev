@@ -9,16 +9,22 @@ import {
   CardHeader,
 } from '@/components/ui/card'
 import {Separator} from '@/components/ui/separator'
+import {useProperties} from '@/hooks/useProperties'
 import {Property} from '@/lib/utils'
 
 export default function PropertyCard({property}: {property: Property}) {
-  const {title, feature, price, rooms} = property
+  const {deleteProp} = useProperties()
+  const {title, feature, price, rooms, id} = property
+
+  function onClick() {
+    deleteProp({id})
+  }
 
   return (
     <Card>
       <CardHeader>
         <CardDescription>{title}</CardDescription>
-        <X className="h-6 w-6" />
+        <X className="h-6 w-6" onClick={onClick} />
       </CardHeader>
       <CardContent>
         <div className="flex space-x-3">
