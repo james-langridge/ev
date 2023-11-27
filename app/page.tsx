@@ -1,15 +1,5 @@
-import PropertyCard from '@/components/property-card'
-import {generateProperties} from '@/lib/utils'
+import DashBoard from '@/app/dashboard'
 
 export default function Home() {
-  const data = generateProperties()
-
-  return (
-    <div className="flex flex-wrap justify-evenly items-center h-screen space-x-2 space-y-6 p-4">
-      {data &&
-        data.map(property => (
-          <PropertyCard key={property.id} property={property} />
-        ))}
-    </div>
-  )
+  return <DashBoard />
 }
