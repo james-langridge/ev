@@ -9,12 +9,15 @@ import {
   CardHeader,
 } from '@/components/ui/card'
 import {Separator} from '@/components/ui/separator'
+import {Property} from '@/lib/utils'
 
-export default function PropertyCard() {
+export default function PropertyCard({property}: {property: Property}) {
+  const {title, feature, price, rooms} = property
+
   return (
     <Card>
       <CardHeader>
-        <CardDescription>Unique luxury estate</CardDescription>
+        <CardDescription>{title}</CardDescription>
         <X className="h-6 w-6" />
       </CardHeader>
       <CardContent>
@@ -29,16 +32,18 @@ export default function PropertyCard() {
           <div className="flex w-1/2 flex-col justify-between py-2">
             <div className="flex justify-between">
               <span className="text-muted-foreground">Rooms</span>{' '}
-              <span>4</span>
+              <span>{rooms}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground">Feature</span>{' '}
-              <span>345 m{`\u00B2`}</span>
+              <span>
+                {new Intl.NumberFormat('de-DE').format(feature)} m{`\u00B2`}
+              </span>
             </div>
             <Separator className="my-2" />
             <div className="flex justify-between">
               <span className="text-muted-foreground">Price</span>{' '}
-              <span>865.000 EUR</span>
+              <span>{new Intl.NumberFormat('de-DE').format(price)} EUR</span>
             </div>
           </div>
         </div>
