@@ -60,7 +60,11 @@ export default function DashBoard() {
         </Select>
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <Button variant="destructive" className="text-lg">
+            <Button
+              variant="destructive"
+              className="text-lg"
+              data-testid="add-button"
+            >
               <Plus strokeWidth={1.25} className="mr-3" /> Add
             </Button>
           </DialogTrigger>

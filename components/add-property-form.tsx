@@ -88,7 +88,11 @@ export function AddPropertyForm({
             <FormItem>
               <FormLabel>Title</FormLabel>
               <FormControl>
-                <Input placeholder="Fantastic property..." {...field} />
+                <Input
+                  placeholder="Fantastic property..."
+                  {...field}
+                  data-testid="title-input"
+                />
               </FormControl>
               <FormDescription>Display title of the property.</FormDescription>
               <FormMessage />
@@ -137,7 +141,9 @@ export function AddPropertyForm({
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" data-testid="submit-button">
+          Submit
+        </Button>
       </form>
     </Form>
   )

@@ -24,7 +24,11 @@ export default function PropertyCard({property}: {property: Property}) {
     <Card>
       <CardHeader>
         <CardDescription>{title}</CardDescription>
-        <X className="h-6 w-6" onClick={onClick} />
+        <X
+          className="h-6 w-6"
+          onClick={onClick}
+          data-testid={`delete-${property.id}`}
+        />
       </CardHeader>
       <CardContent>
         <div className="flex space-x-3">
