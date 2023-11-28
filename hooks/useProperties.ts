@@ -1,9 +1,9 @@
 'use client'
 
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query'
-import {useEffect} from 'react'
 
-import {deleteProperty, getProperties} from '@/lib/api'
+import {addProperty, deleteProperty, getProperties} from '@/lib/api'
+import {Property} from '@/lib/utils'
 
 export function useProperties() {
   const queryClient = useQueryClient()
@@ -34,5 +34,28 @@ export function useProperties() {
     },
   })
 
-  return {properties, deleteProp}
+  const {mutate: addProp} = useMutation({
+    mutationFn: addProperty,
+    onMutate: async newProp => {
+      await queryClient.cancelQueries({queryKey: ['properties']})
+      const oldProperties = queryClient.getQueryData<Property[]>(['properties'])
+      queryClient.setQueryData(['properties'], old => {
+        if (!Array.isArray(old)) {
+          throw new Error('Expected an array of properties')
+        }
+
+        return [...old, {...newProp, id: -1}]
+      })
+
+      return {oldProperties}
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({queryKey: ['properties']})
+    },
+    onError: (err, _, context) => {
+      queryClient.setQueryData(['properties'], context?.oldProperties)
+    },
+  })
+
+  return {properties, deleteProp, addProp}
 }

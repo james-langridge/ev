@@ -13,5 +13,7 @@ export function setProperties(id: string) {
 }
 
 export function addProperty(property: Property) {
-  properties.push(property)
+  properties.unshift(property)
+
+  return properties
 }
