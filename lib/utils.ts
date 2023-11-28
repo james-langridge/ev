@@ -34,3 +34,23 @@ export function generateProperties(): Property[] {
     }
   })
 }
+
+export type SortOrder = 'titleAsc' | 'titleDesc' | 'priceAsc' | 'priceDesc'
+
+export function sortProperties(
+  properties: Property[],
+  sortBy: SortOrder,
+): Property[] {
+  switch (sortBy) {
+    case 'titleAsc':
+      return [...properties].sort((a, b) => (a.title > b.title ? 1 : -1))
+    case 'titleDesc':
+      return [...properties].sort((a, b) => (a.title > b.title ? -1 : 1))
+    case 'priceAsc':
+      return [...properties].sort((a, b) => a.price - b.price)
+    case 'priceDesc':
+      return [...properties].sort((a, b) => b.price - a.price)
+    default:
+      throw new Error('Invalid sorting criteria')
+  }
+}
